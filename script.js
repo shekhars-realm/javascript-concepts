@@ -24,3 +24,14 @@ let result1 = processObj({name:   "john",age: "25"})
 
 
 //----------WEAKSET-----------
+//Similar to SET but it holds only objects as keys, not primitives
+//supports add, has, delete but not keys(), size and no iterations
+//usecase: keep track of the users that visited a webpage
+let visitedSet = new WeakSet()
+
+let user_1 = {name: "john"}
+let user_2 = {name: "tom"}
+
+visitedSet.add(user_1).add(user_2);
+
+console.log(visitedSet.has(user_2)) //john visited the webpage
