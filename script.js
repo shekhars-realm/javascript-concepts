@@ -27,11 +27,40 @@ let result1 = processObj({name:   "john",age: "25"})
 //Similar to SET but it holds only objects as keys, not primitives
 //supports add, has, delete but not keys(), size and no iterations
 //usecase: keep track of the users that visited a webpage
+//usecase:  WeakSet is used to give flags like true/false, exists/not,  yes/no
+
 let visitedSet = new WeakSet()
 
 let user_1 = {name: "john"}
 let user_2 = {name: "tom"}
 
 visitedSet.add(user_1).add(user_2);
+console.log(visitedSet.has(user_2)) //john visited the webpage:  true
+user_1 = null //Visited set will  be cleared automatically
 
-console.log(visitedSet.has(user_2)) //john visited the webpage
+
+//--------------Example for WEAKMAP and WEAKSET---------------
+//Create a DS  that hold the unred messages and remves them as soon as they are read. : WeakSet
+let messages = [
+  { text: "Hello", from: "John" },
+  { text: "How goes?", from: "John" },
+  { text: "See you soon", from: "Alice" },
+];
+
+let readMessages = new WeakSet();
+
+// two messages have been read
+readMessages.add(messages[0]);
+readMessages.add(messages[1]);
+// readMessages has 2 elements
+
+// ...let's read the first message again!
+readMessages.add(messages[0]);
+// readMessages still has 2 unique elements
+
+// answer: was the message[0] read?
+alert("Read message 0: " + readMessages.has(messages[0])); // true
+
+messages.shift();
+// now readMessages has 1 element (technically memory may be cleaned later)
+
