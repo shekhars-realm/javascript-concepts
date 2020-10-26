@@ -1,3 +1,38 @@
+//-----------DESIGN PATTERNS------------
+//Factory Pattern
+//Factory pattern in a creationsl design method that uses factory methods to create objects.
+function Developer(name) {
+  this.name = name
+  this.type = "Developer"
+}
+function Tester(name) {
+  this.name = name
+  this.type = "Tester"
+}
+function EmployeeFactory() {
+  this.create = (name, type) => {
+    switch(type) {
+      case  1: 
+        return new Developer(name)
+        break;
+      case 2:
+        return new Tester(name)
+        break;
+    }
+  }
+}
+
+const employeeFactory = new EmployeeFactory()
+let employees = []
+
+employees.push(employeeFactory.create("John",1))
+employees.push(employeeFactory.create("Tom", 2));
+
+console.log(employees)
+
+
+
+
 //---------WEAKMAP------------------ 
 //weakmap . doesnot prevent garbage collection of key objects
 //weakMapkeys mmust be objects and not primitive values
@@ -59,7 +94,7 @@ readMessages.add(messages[0]);
 // readMessages still has 2 unique elements
 
 // answer: was the message[0] read?
-alert("Read message 0: " + readMessages.has(messages[0])); // true
+console.log("Read message 0: " + readMessages.has(messages[0])); // true
 
 messages.shift();
 // now readMessages has 1 element (technically memory may be cleaned later)
