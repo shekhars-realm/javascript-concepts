@@ -31,6 +31,15 @@ employees.push(employeeFactory.create("Tom", 2));
 console.log(employees)
 
 
+//Singleton Pattern
+//Behaviousral Pattern
+//Proxy patter
+//Observre Pattern
+
+
+    
+
+
 
 
 //---------WEAKMAP------------------ 
@@ -99,3 +108,29 @@ console.log("Read message 0: " + readMessages.has(messages[0])); // true
 messages.shift();
 // now readMessages has 1 element (technically memory may be cleaned later)
 
+//---------------CUSTOM .BIND()--------------
+
+let userObj = {
+  firstname: "Shekhar",
+  lastname: "BHattacharya"
+}
+
+let printName = function (hometown, state) {
+  console.log(this.firstname + " " + this.lastname + ", " + hometown + ", " + state)
+}
+//call: printname.call(userobj, arguments)
+//apply:  printname.apply(userobj, [arguments])
+let printMyname = printName.bind(userObj, "india")
+printMyname("world")
+
+//mybind  implementation
+Function.prototype.mybind = function(...args){
+  let parentContext = this
+  let params =   args.slice(1)
+  return function(...args2) {
+    parentContext.apply(args[0], [...params, ...args2]);
+  }
+}
+
+let printmyname2 = printName.mybind(userObj, "hometown")
+printmyname2("state")
