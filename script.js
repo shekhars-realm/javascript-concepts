@@ -134,3 +134,13 @@ Function.prototype.mybind = function(...args){
 
 let printmyname2 = printName.mybind(userObj, "hometown")
 printmyname2("state")
+
+//-------------CURRYING---------
+//Currying refers to the transformation of a function with multiple arity into the same  function with ess arity
+let multiply = function(x, y) {
+  console.log(x*y)
+}
+
+let multiplyby2 = multiply.bind(this, 2) //usingg the previous function, created a new one
+
+
