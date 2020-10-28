@@ -1,3 +1,79 @@
+//----------INHERITANCE-------
+/*
+Inheritance is  used when we know the answer to what/who. 
+One drawback is that we have to keep  the future in mind
+*/
+class Animal {
+  poops = () => {
+    console.log("animal poops")
+  }
+}
+
+class Reptile extends  Animal {
+  crawls = ()  => {
+    console.log("Reptiles crawl")
+  }
+}
+
+class Amphibian extends Animal {
+  walks = () => {
+    console.log("Amphibians walk")
+  }
+}
+
+const reptile = new Reptile()
+const amphibian = new Amphibian() 
+
+console.log(reptile.poops()) //inheriting Animal class
+console.log(amphibian.poops()) //inheriting class Animal
+
+/*
+The problem with Inheritance is that it is not very flexible. It is hard to change the design pattern
+later on in a project if someething new comes up like creating a reptile  that also walks
+*/
+//  In that case composition is used.   
+
+
+//------------COMPOSITION------------
+
+/*
+Compositioon focses on HOW. It creates functions that can be used inside of different objects to  define WHAT/WHO
+*/
+
+function animalWalks({name}) {
+  return {
+    walks: () => console.log(name+"animal  walks")
+  }
+}
+
+function animalCrawls() {
+  return {
+    walks: () => console.log(name+"animal  crawls")
+  }
+}
+
+function animalFly() {
+  return {
+    walks: () => console.log(name+"animal  flies")
+  }
+}
+
+function animalThatFliesAndWalks(name)  {
+  const animal = {name}
+  return {
+    ...animal,
+    ...animalWalks(animal)
+  }
+}
+
+const final = animalThatFliesAndWalks("Ostrich")
+final.walks()
+
+
+
+
+
+
 //-----------DESIGN PATTERNS------------
 //Factory Pattern
 //Factory pattern in a creationsl design method that uses factory methods to create objects.
