@@ -42,19 +42,19 @@ Compositioon focses on HOW. It creates functions that can be used inside of diff
 
 function animalWalks({name}) {
   return {
-    walks: () => console.log(name+"animal  walks")
+    walks: () => console.log(name+"  walks")
   }
 }
 
-function animalCrawls() {
+function animalCrawls({name}) {
   return {
-    walks: () => console.log(name+"animal  crawls")
+    crawls: () => console.log(name+"  crawls")
   }
 }
 
-function animalFly() {
+function animalFly({name}) {
   return {
-    walks: () => console.log(name+"animal  flies")
+    flies: () => console.log(name+"  flies")
   }
 }
 
@@ -66,16 +66,25 @@ function animalThatFliesAndWalks(name)  {
   }
 }
 
+function  animalThatWalksAndCrawls(name) {
+  const animal = {name}
+  return {
+    ...animal,
+    ...animalWalks(animal),
+    ...animalCrawls(animal)
+  }
+}
+
 const final = animalThatFliesAndWalks("Ostrich")
+const walkCrawl = animalThatWalksAndCrawls("random_animal")
 final.walks()
+walkCrawl.crawls()
 
-
-
-
+//Here using composition we can create any number of  combination of the functions
 
 
 //-----------DESIGN PATTERNS------------
-//Factory Pattern
+//Factory Pattern--------------
 //Factory pattern in a creationsl design method that uses factory methods to create objects.
 function Developer(name) {
   this.name = name
@@ -107,8 +116,45 @@ employees.push(employeeFactory.create("Tom", 2));
 console.log(employees)
 
 
-//Singleton Pattern
-//Behaviousral Pattern
+//Singleton Pattern-------------
+//a creational pattern.  Comes in handy when we want to limit  the number of instances
+//of  an object to atmost one.
+function Process(state) {
+  this.state = state
+}
+
+const Singleton = (function(){
+  function ProcessManager(){
+    this.numProcess = 0
+  }
+  let pManager
+  function createPManager() {
+    pManagger  = new ProcessManager()
+    return pManager
+  } 
+  return {
+    getProcessManager: () => {
+      if(!pManager){
+        pManager = createPManager()
+      }
+      return pManager;
+    }
+  }
+})()
+
+const processManagerIns = Singleton.getProcessManager()
+const processManagerIns2 = Singleton.getProcessManager()
+
+console.log(processManagerIns  === processManagerIns2) //Same instance returned twice
+
+
+//Strategy Pattern-------------
+//A behavioural pattern. It enables us to define a group of closely related algorithms/strategies.
+//The strategy pattern allows us to swap strategies in and out for each other as needed at runtime.
+
+
+
+
 //Proxy patter
 //Observre Pattern
 
@@ -218,5 +264,22 @@ let multiply = function(x, y) {
 }
 
 let multiplyby2 = multiply.bind(this, 2) //usingg the previous function, created a new one
+
+
+
+//---------------Javascript SOLID Priinciples--------
+
+/*
+1. Single Responsibility  - Any module of the code should have only one responsibbility or only one reason to change.
+For  example:  Lets say we have a Calory tracker class that contains functions to track calory an log the current calory. 
+Since it has multiple responsibilitie, we  can move logger toa different module of its own
+*/
+
+/*
+2. Open/Cllosed Principle:  
+*/
+
+
+
 
 
